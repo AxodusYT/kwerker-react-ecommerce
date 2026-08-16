@@ -18,7 +18,7 @@ and persistent browser storage.
   -------------- ---------------------------------------------------------
   🚀 Live Demo   **https://kwerker-react-ecommerce.vercel.app/** \
   💻 GitHub      **https://github.com/AxodusYT/kwerker-react-ecommerce** \
-  🔗 LinkedIn    **https://www.linkedin.com/in/axo-vishal/** \
+  🔗 LinkedIn    **https://www.linkedin.com/in/axo-vishal/** 
 
 
 
