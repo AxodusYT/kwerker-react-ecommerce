@@ -4,6 +4,7 @@ import { MyStore } from "../context/MyContext";
 import Navbar from "../components/Navbar";
 import ProductToolbar from "../components/ProductToolbar";
 import ProductCard from "../components/ProductCard";
+import Footer from "../components/Footer";
 
 const Products = () => {
   const { products } = useContext(MyStore);
@@ -81,6 +82,7 @@ const Products = () => {
           )}
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

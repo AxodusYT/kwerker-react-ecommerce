@@ -5,6 +5,7 @@ import ProductToolbar from "../components/ProductToolbar";
 import ProductCard from "../components/ProductCard";
 import { useContext, useMemo, useState } from "react";
 import { MyStore } from "../context/MyContext";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const { products } = useContext(MyStore);
@@ -134,6 +135,7 @@ const Home = () => {
           </section>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router";
 import { MyStore } from "../context/MyContext";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Categories = () => {
   const { products } = useContext(MyStore);
@@ -153,6 +154,7 @@ const Categories = () => {
         </div>
 
       </main>
+      <Footer />
 
     </div>
   );

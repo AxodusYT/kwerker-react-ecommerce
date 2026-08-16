@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { MyStore } from "../context/MyContext";
+import Footer from "../components/Footer";
 
 const ProductDetails = () => {
   const {
@@ -266,6 +267,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

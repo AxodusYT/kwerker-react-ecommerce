@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import ProductCard from "../components/ProductCard";
 
 import { MyStore } from "../context/MyContext";
+import Footer from "../components/Footer";
 
 const Wishlist = () => {
   const { wishlist } = useContext(MyStore);
@@ -59,6 +60,7 @@ const Wishlist = () => {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 };

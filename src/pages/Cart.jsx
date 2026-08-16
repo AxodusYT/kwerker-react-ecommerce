@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router";
 import Navbar from "../components/Navbar";
 import { MyStore } from "../context/MyContext";
+import Footer from "../components/Footer";
 
 const Cart = () => {
   const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
@@ -218,6 +219,7 @@ const Cart = () => {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 };
