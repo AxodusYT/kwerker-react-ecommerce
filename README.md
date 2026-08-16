@@ -16,12 +16,11 @@ and persistent browser storage.
 
   Resource       Link
   -------------- ---------------------------------------------------------
-  🚀 Live Demo   **https://kwerker-react-ecommerce.vercel.app/**
-  💻 GitHub      **https://github.com/AxodusYT/kwerker-react-ecommerce**
-  🔗 LinkedIn    **https://www.linkedin.com/in/axo-vishal/**
+  🚀 Live Demo   **https://kwerker-react-ecommerce.vercel.app/** \
+  💻 GitHub      **https://github.com/AxodusYT/kwerker-react-ecommerce** \
+  🔗 LinkedIn    **https://www.linkedin.com/in/axo-vishal/** \
 
-> Replace `YOUR_LIVE_VERCEL_URL` with the Vercel deployment URL and
-> `YOUR_LINKEDIN_URL` with your LinkedIn profile URL after deployment.
+
 
 ------------------------------------------------------------------------
 
