@@ -1,35 +1,56 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router";
 import { MyStore } from "../context/MyContext";
+import {
+  Search,
+  Heart,
+  ShoppingCart,
+  Menu,
+  X,
+} from "lucide-react";
 
 const Navbar = () => {
   const { cart, currentUser, logoutUser } = useContext(MyStore);
+
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const cartCount = cart.reduce(
     (total, item) => total + (item.quantity || 1),
     0,
   );
 
-  ///// for mobile screen hamburger
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  const handleLogout = () => {
+    logoutUser();
+    closeMenu();
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+
+        {/* ================= MAIN NAVBAR ================= */}
+
         <div className="h-18 flex items-center justify-between">
+
           {/* Logo */}
 
           <Link
             to="/"
-            className="text-2xl font-black tracking-tight text-gray-900"
+            onClick={closeMenu}
+            className="text-xl sm:text-2xl font-black tracking-tight text-gray-900"
           >
             K<span className="text-violet-600">werker</span>
           </Link>
 
-          {/* Main Navigation */}
+
+          {/* ================= DESKTOP NAVIGATION ================= */}
 
           <div className="hidden md:flex items-center gap-8">
+
             <Link
               to="/"
               className="text-sm font-medium text-gray-900 hover:text-violet-600 transition"
@@ -57,84 +78,64 @@ const Navbar = () => {
             >
               About
             </Link>
+
           </div>
 
-          {/* Right Side */}
 
-          <div className="flex items-center gap-2">
+          {/* ================= RIGHT SIDE ================= */}
+
+          <div className="flex items-center gap-1 sm:gap-2">
+
             {/* Search */}
+
             <Link
               to="/products"
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 hover:text-violet-600 transition"
               aria-label="Search"
+              className="flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 hover:text-violet-600 transition"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.8"
-                stroke="currentColor"
-                className="h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m21 21-4.35-4.35m1.35-5.4a6.75 6.75 0 1 1-13.5 0 6.75 6.75 0 0 1 13.5 0Z"
-                />
-              </svg>
+              <Search className="h-5 w-5" />
             </Link>
+
+
             {/* Wishlist */}
+
             <Link
               to="/wishlist"
-              className="hidden sm:flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 hover:text-violet-600 transition"
               aria-label="Wishlist"
+              className="hidden sm:flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 hover:text-violet-600 transition"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.8"
-                stroke="currentColor"
-                className="h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"
-                />
-              </svg>
+              <Heart className="h-5 w-5" />
             </Link>
+
+
             {/* Cart */}
+
             <Link
               to="/cart"
-              className="relative flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 hover:text-violet-600 transition"
               aria-label="Cart"
+              className="relative flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 hover:text-violet-600 transition"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.8"
-                stroke="currentColor"
-                className="h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835L5.4 6m0 0h14.55c.764 0 1.33.746 1.087 1.48l-1.5 5.25A1.5 1.5 0 0 1 18.094 13.8H8.01a1.5 1.5 0 0 1-1.447-1.106L5.4 6Zm2.61 11.25a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm10.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
-                />
-              </svg>
+              <ShoppingCart className="h-5 w-5" />
 
-              <span className="absolute -right-1 -top-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-violet-600 px-1 text-[10px] font-bold text-white">
-                {cartCount}
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-violet-600 px-1 text-[10px] font-bold text-white">
+                  {cartCount}
+                </span>
+              )}
             </Link>
+
+
             {/* Divider */}
-            <div className="mx-2 hidden sm:block h-7 w-px bg-gray-200" />
-            {/* Login */}
+
+            <div className="mx-2 hidden md:block h-7 w-px bg-gray-200" />
+
+
+            {/* ================= DESKTOP AUTH ================= */}
+
             {currentUser ? (
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-semibold text-gray-700">
+              <div className="hidden md:flex items-center gap-3">
+
+                <span className="text-sm font-semibold text-gray-700 whitespace-nowrap">
                   Hi, {currentUser.name}
                 </span>
 
@@ -145,9 +146,11 @@ const Navbar = () => {
                 >
                   Logout
                 </button>
+
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="hidden md:flex items-center gap-2">
+
                 <Link
                   to="/login"
                   className="px-4 py-2 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-100 transition"
@@ -161,93 +164,152 @@ const Navbar = () => {
                 >
                   Sign Up
                 </Link>
+
               </div>
             )}
-            {/* Mobile Menu */}
+
+
+            {/* ================= MOBILE MENU BUTTON ================= */}
+
             <button
               type="button"
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="flex md:hidden h-10 w-10 items-center justify-center rounded-xl text-gray-700 hover:bg-gray-100 transition"
+              onClick={() => setMenuOpen((prev) => !prev)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              className="flex md:hidden h-10 w-10 items-center justify-center rounded-xl text-gray-700 hover:bg-gray-100 hover:text-violet-600 transition"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.8"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                {menuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18 18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                )}
-              </svg>
+              {menuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
+
           </div>
+
         </div>
+
+
+        {/* ================= MOBILE MENU ================= */}
+
         {menuOpen && (
           <div className="md:hidden border-t border-gray-100 py-4">
+
+            {/* User */}
+
+            {currentUser ? (
+              <div className="px-4 py-4 mb-3 rounded-2xl bg-violet-50">
+
+                <p className="text-xs font-medium text-violet-600">
+                  Signed in as
+                </p>
+
+                <p className="text-sm font-bold text-gray-900 mt-1">
+                  {currentUser.name}
+                </p>
+
+              </div>
+            ) : (
+              <div className="px-4 py-4 mb-3 rounded-2xl bg-gray-50">
+
+                <p className="text-sm font-semibold text-gray-900">
+                  Welcome to Kwerker
+                </p>
+
+                <div className="flex gap-2 mt-3">
+
+                  <Link
+                    to="/login"
+                    onClick={closeMenu}
+                    className="flex-1 h-10 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-sm font-semibold text-gray-700"
+                  >
+                    Login
+                  </Link>
+
+                  <Link
+                    to="/register"
+                    onClick={closeMenu}
+                    className="flex-1 h-10 flex items-center justify-center rounded-xl bg-violet-600 text-white text-sm font-semibold"
+                  >
+                    Sign Up
+                  </Link>
+
+                </div>
+
+              </div>
+            )}
+
+
+            {/* Navigation */}
+
             <div className="flex flex-col gap-1">
+
               <Link
                 to="/"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600"
+                onClick={closeMenu}
+                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600 transition"
               >
                 Home
               </Link>
 
               <Link
                 to="/products"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600"
+                onClick={closeMenu}
+                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600 transition"
               >
                 Shop
               </Link>
 
               <Link
                 to="/categories"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600"
+                onClick={closeMenu}
+                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600 transition"
               >
                 Categories
               </Link>
 
               <Link
                 to="/about"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600"
+                onClick={closeMenu}
+                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600 transition"
               >
                 About
               </Link>
 
               <Link
                 to="/wishlist"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600"
+                onClick={closeMenu}
+                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600 transition sm:hidden"
               >
                 Wishlist
               </Link>
 
               <Link
                 to="/cart"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600"
+                onClick={closeMenu}
+                className="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-violet-600 transition"
               >
                 Cart
               </Link>
+
             </div>
+
+
+            {/* Logout */}
+
+            {currentUser && (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="w-full mt-3 px-4 py-3 rounded-xl text-left text-sm font-semibold text-red-500 hover:bg-red-50 transition"
+              >
+                Logout
+              </button>
+            )}
+
           </div>
         )}
+
       </div>
     </nav>
   );
